@@ -1,9 +1,6 @@
 'use client'
 import { usePathname } from 'next/navigation';
-import React from 'react'
 import { CiSearch } from "react-icons/ci";
-import { IoIosNotificationsOutline } from "react-icons/io";
-
 const Navbar = () => {
     let router = usePathname();
     let path = router.split('/').pop() || "";

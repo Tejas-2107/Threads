@@ -12,5 +12,16 @@ li{
 }
 .active{
   background-color:  #64748b;
-  
+}
+
+.newuser input, .newproduct input {
+  height: 3.5rem;
+  border: 2px solid rgb(133, 132, 133);
+  width: 300px;
+  border-radius: 2%;
+}
+
+.newuser ::placeholder,.newproduct ::placeholder{
+  color: black;
+  padding: 2px;
 }
