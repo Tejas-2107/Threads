@@ -8,11 +8,11 @@ export default function RootLayout({
 }>) {
   return (
     <div>
-        <main className="flex justify-between">
-            <LeftSidebar />
-            {children}
-            <RightSidebar />
-        </main>
+      <main className="flex justify-between">
+        <LeftSidebar />
+        {children}
+        <RightSidebar />
+      </main>
     </div>
   );
 }
