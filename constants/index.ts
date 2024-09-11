@@ -28,7 +28,7 @@ export const LeftSidebarOptions = [
     id: 5,
     name: "Communities",
     imgUrl: "/assets/community.svg",
-    route: "communities",
+    route: "/communities",
   },
   {
     id: 6,

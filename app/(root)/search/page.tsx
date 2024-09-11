@@ -1,11 +1,10 @@
-import React from 'react'
-
-const page = () => {
+const page = async() => {
+  
   return (
     <div>
       <h1>Search</h1>
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

@@ -4,7 +4,13 @@ import "../globals.css";
 import TopBar from "@/components/shared/TopBar";
 import LeftSidebar from "@/components/shared/LeftSidebar";
 import RightSidebar from "@/components/shared/RightSidebar";
-import BottomBar from "@/components/shared/BottomBar";
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,12 +28,13 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <TopBar />
-        <main className="flex justify-between p-4">
+        <main className="flex flex-row justify-between h-screen">
           <LeftSidebar />
-          <section>{children}</section>
+          <section className="bg-black text-white-1 ">
+            {children}
+          </section>
           <RightSidebar />
         </main>
-        <BottomBar />
       </body>
     </html>
   );

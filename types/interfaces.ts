@@ -1,29 +1,30 @@
-export interface Product {
-    title: string;
-    category: string;
-    price: number;
-    stock: number;
-    color: string;
-    size: string;
-    description: string;
-    date?: Date;
-}
 export interface User {
-    username: string;
-    email: string;
-    password: string;
-    phone: string;
-    isAdmin?: boolean;
-    isActive?: boolean;
-    address: string;
-    date?: Date; 
-  }
+  username: string;
+  email: string;
+  password: string;
+  image: File | null;
+  bio: string;
+  date?: Date;
+}
 
-  export interface UserResponse{
+export interface SignIn {
+  email: string;
+  password: string;
+}
+
+export interface UserProfile {
+  user: {
+    id: string;
     username: string;
     email: string;
-    isAdmin: boolean;
-    _id: string;
-    date: Date; 
-  }
-  
+    bio: string;
+  };
+}
+
+export interface UpdateUser {
+  id: string;
+  username: string;
+  email: string;
+  bio: string;
+  pathname: string;
+}

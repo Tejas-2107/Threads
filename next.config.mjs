@@ -1,12 +1,20 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images:{
-        remotePatterns:[
+    images: {
+        remotePatterns: [
             {
-                protocol:'https',
-                hostname:'lovely-flamingo-139.convex.cloud'
+                protocol: 'https',
+                hostname: 'podcastr-images.s3.ap-south-1.amazonaws.com',
+                port: '',
+                pathname: '/**'
+            },
+            {
+                protocol: 'https',
+                hostname: 'podcastr-images.s3.amazonaws.com',
+                port: '',
+                pathname: '/**'
             }
-        ]
+        ],
     }
 };
 

@@ -12,3 +12,9 @@ html {
   background-color: #101114;
   color: white;
 }
+label{
+  color: white;
+}
+input{
+  background-color: rgb(23, 22, 22);
+}

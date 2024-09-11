@@ -1,6 +1,6 @@
 import React from 'react'
 
-const BottomBar = () => {
+const page = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const BottomBar = () => {
   )
 }
 
-export default BottomBar
+export default page

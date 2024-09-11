@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Onboarding = () => {
+const page = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const Onboarding = () => {
   )
 }
 
-export default Onboarding
+export default page
