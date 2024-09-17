@@ -1,21 +1,18 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 
 const TopBar = () => {
-  const isUserLoggedIn = 0;
   const router = useRouter();
-  const [loader, setLoader] = useState(false);
   const logout = async () => {
     try {
       await axios.delete("/api/users/logout");
       router.push("/sign-in");
     } catch (error: any) {
-      console.error(error.message);
+      throw new Error(error.message);
     }
   };
   return (
@@ -34,8 +31,9 @@ const TopBar = () => {
             alt="profile picture"
           />
           <Button
-            className={`bg-blue-500 hover:bg-blue-400 ${loader && "disabled"}`}
+            className="border border-solid border-blue-300"
             type="submit"
+            variant="secondary"
             onClick={logout}
           >
             <Image

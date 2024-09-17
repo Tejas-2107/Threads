@@ -18,7 +18,7 @@ const page = async () => {
   };
 
   return (
-    <div className="edit_profile">
+    <div className="edit_profile flex justify-center">
       <AccountProfile user={userData} />
     </div>
   );

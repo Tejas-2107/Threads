@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    unique:true,
+    unique: true,
     required: true,
   },
   password: {
@@ -17,12 +17,16 @@ const userSchema = new mongoose.Schema({
   },
   imageUrl: {
     type: String,
-    default:"",
+    default: "",
   },
   bio: { type: String, default: "" },
   date: {
     type: Date,
     default: Date.now,
+  },
+  community: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Community",
   },
   threads: [
     {

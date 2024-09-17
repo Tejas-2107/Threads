@@ -11,16 +11,13 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { fetchToken } from "@/helper/fetchToken";
-import { redirect } from "next/navigation";
 import { fetchUser } from "@/actions/user.actions";
 const page = async () => {
   const id = fetchToken();
-  if (!id) {
-    redirect("/sign-in");
-  }
+  if (!id) return null;
   const data = await fetchUser(id);
   return (
-    <div className="profile">
+    <div className="profile flex justify-center">
       <Card className="w-[350px] mt-14">
         <CardHeader>
           <CardTitle>Profile</CardTitle>

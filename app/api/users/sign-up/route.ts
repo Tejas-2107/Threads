@@ -48,6 +48,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
     const imageUrl = `https://${imageUploadParams.Bucket}.s3.amazonaws.com/${imageUploadParams.Key}`;
     // //hash password
     const salt = await bcryptjs.genSalt(10);
+    //@ts-ignore
     const hashedPassword = await bcryptjs.hash(password, salt);
     const newUser = new User({
       username,

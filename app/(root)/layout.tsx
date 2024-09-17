@@ -30,7 +30,7 @@ export default function RootLayout({
         <TopBar />
         <main className="flex flex-row justify-between h-screen">
           <LeftSidebar />
-          <section className="bg-black text-white-1 ">
+          <section className="bg-black text-white-1 w-2/5 mx-auto">
             {children}
           </section>
           <RightSidebar />

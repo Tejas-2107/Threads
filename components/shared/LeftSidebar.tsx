@@ -25,11 +25,6 @@ const LeftSidebar = () => {
           );
         })}
       </div>
-      <div
-        className="logout ml-6 mt-36"
-        onClick={() => router.push("/sign-in")}
-      >
-      </div>
     </div>
   );
 };

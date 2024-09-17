@@ -13,6 +13,7 @@ import { Label } from "@/components/ui/label";
 import { updateUser } from "@/actions/user.actions";
 import { UserProfile } from "@/types/interfaces";
 import { usePathname, useRouter } from "next/navigation";
+import { Textarea } from "../ui/textarea";
 
 const AccountProfile = ({ user }: UserProfile) => {
   const router = useRouter();
@@ -81,11 +82,13 @@ const AccountProfile = ({ user }: UserProfile) => {
                   onChange={handleChange}
                 />
                 <Label htmlFor="bio">Bio</Label>
-                <Input
+                <Textarea
+                className="bg-black-1"
                   required
                   minLength={5}
                   name="bio"
                   defaultValue={user.bio}
+                  //@ts-ignore
                   onChange={handleChange}
                 />
               </div>
