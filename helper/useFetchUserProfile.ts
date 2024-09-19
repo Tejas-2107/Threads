@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { fetchToken } from "./fetchToken";
+import { fetchToken } from "./fetchUserId";
 export const useFetchUserProfile = () => {
   const router = useRouter();
   const [user, setUser] = useState(null);

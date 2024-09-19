@@ -39,7 +39,16 @@ export async function fetchPosts(pageNumber: 1, pageSize: 20) {
         path: "author", // Populating the 'author' field with user data
         select: "username imageUrl",
         model: "User",
+      })
+      .populate({
+        path: "children", // Populate the children field
+        populate: {
+          path: "author", // Populate the author field within children
+          model: User,
+          select: "_id username parentId imageUrl", // Select only _id and username fields of the author
+        },
       });
+
     const totalPostsCount = await Thread.countDocuments({
       parentId: { $in: [null, undefined] },
     });
@@ -55,11 +64,31 @@ export async function fetchPosts(pageNumber: 1, pageSize: 20) {
 export async function fetchThreadById(threadId: string) {
   try {
     connectToDB();
-    return await Thread.findById(threadId).populate({
-      path: "author", // Populating the 'author' field with user data
-      select: "_id username imageUrl",
-      model: "User",
-    });
+    return await Thread.findById(threadId)
+      .populate({
+        path: "author", // Populating the 'author' field with user data
+        select: "_id username imageUrl",
+        model: "User",
+      })
+      .populate({
+        path: "children", // Populate the children field
+        populate: [
+          {
+            path: "author", // Populate the author field within children
+            model: User,
+            select: "_id username parentId imageUrl", // Select only _id and username fields of the author
+          },
+          {
+            path: "children", // Populate the children field within children
+            model: Thread, // The model of the nested children (assuming it's the same "Thread" model)
+            populate: {
+              path: "author", // Populate the author field within nested children
+              model: User,
+              select: "_id username parentId imageUrl", // Select only _id and username fields of the author
+            },
+          },
+        ],
+      });
   } catch (error: any) {
     throw new Error(`error while fetching thread data ${error.message}`);
   }

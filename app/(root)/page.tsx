@@ -1,10 +1,10 @@
 import { fetchPosts } from "@/actions/thread.actions";
-import { fetchToken } from "@/helper/fetchToken";
+import { fetchUserId } from "@/helper/fetchUserId";
 import React from "react";
 import ThreadCard from "@/components/cards/ThreadCard";
 import { fetchUser } from "@/actions/user.actions";
 const Home = async () => {
-  const id = fetchToken();
+  const id = fetchUserId();
   const {posts,totalPostsCount,isNextPage} = await fetchPosts(1,20);
   return (
     <div className="home_page">
@@ -22,6 +22,7 @@ const Home = async () => {
                 date={createdAt}
                 imageUrl={author.imageUrl}
                 username={author.username}
+                userId={author._id}
                 comments={children}
               />
             ))}

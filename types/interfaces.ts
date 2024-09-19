@@ -30,24 +30,31 @@ export interface UpdateUser {
 }
 
 export interface ThreadData {
-  userId: string; 
+  userId: string;
   content: string;
   communityId: string | null;
   path: string;
 }
 
-export interface ThreadCardParams{
-  key:string;
-  postId:string;
-  currUserId:string;
-  text:string;
-  date:Date;
-  imageUrl:string;
-  username:string;
-  comments:any[]
+export interface ThreadCardParams {
+  key: string;
+  postId: string;
+  currUserId: string;
+  text: string;
+  date: Date;
+  imageUrl: string;
+  username: string;
+  comments: any[];
+  isComment?: boolean;
+  userId: string;
 }
-export interface CommentProps{
-  currentUserId:string;
-  threadId:string;
-  imageUrl:string
+export interface CommentProps {
+  currentUserId: string;
+  threadId: string;
+  imageUrl: string;
+}
+export interface ThreadsTabProps {
+  currentUserId: string;
+  accountId: string;
+  accountType: string; // Example of possible account types, you can adjust as needed
 }

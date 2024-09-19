@@ -4,15 +4,14 @@ import { LeftSidebarOptions } from "@/constants";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Button } from "../ui/button";
-const LeftSidebar = () => {
+const LeftSidebar = ({userId}:{userId:string}) => {
   const path = usePathname();
-  const router = useRouter();
   return (
     <div className="custom-scrollbar bg-black-1">
       <div className="sidebar_options flex flex-col gap-5 p-5">
         {LeftSidebarOptions.map(({ id, name, route, imgUrl }) => {
           const isActive = route === path;
+          if (route === "/profile") route = `${route}/${userId}`;
           return (
             <Link
               href={route}

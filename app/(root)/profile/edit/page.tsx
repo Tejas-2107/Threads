@@ -1,11 +1,11 @@
 import React from "react";
-import { fetchToken } from "@/helper/fetchToken";
+import { fetchUserId } from "@/helper/fetchUserId";
 import { redirect } from "next/navigation";
 import { fetchUser, updateUser } from "@/actions/user.actions";
 import AccountProfile from "@/components/forms/AccountProfile";
 
 const page = async () => {
-  const id = fetchToken();
+  const id = fetchUserId();
   if (!id) {
     redirect("/sign-in");
   }
