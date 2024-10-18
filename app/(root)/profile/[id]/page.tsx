@@ -14,17 +14,18 @@ const page = async ({ params }: { params: { id: string } }) => {
   return (
     <div className="profile mt-12">
       <div className="flex items-center gap-x-2 p-2">
-        <Image
-          src={userData.imageUrl}
-          alt="profile pic"
-          height={64}
-          width={100}
-          className="rounded-full"
-        />
+        <div className="relative h-40 w-40">
+          <Image
+            src={userData.imageUrl}
+            alt="user_logo"
+            fill
+            className="rounded-full object-cover"
+          />
+        </div>
         <h1 className="font-light text-gray-1">@{userData.username}</h1>
       </div>
       <div>
-        <h1 className="font-light">{userData.bio}</h1>
+        <h1 className="font-light ml-5">{userData.bio}</h1>
         {currentUserId === params.id && (
           <Link href={`/profile/edit`} className="mx-auto">
             <Button className="bg-blue-500 w-full mt-3">Edit</Button>
@@ -48,12 +49,6 @@ const page = async ({ params }: { params: { id: string } }) => {
                   className="object-contain"
                 />
                 <p className="max-sm:hidden">{tab.label}</p>
-
-                {tab.label === "Threads" && (
-                  <p className="ml-1 rounded-sm bg-light-4 px-2 py-1 !text-tiny-medium text-light-2">
-                    {userData.threads.length}
-                  </p>
-                )}
               </TabsTrigger>
             ))}
           </TabsList>

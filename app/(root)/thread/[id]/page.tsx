@@ -4,7 +4,6 @@ import { fetchUserId } from "@/helper/fetchUserId";
 import Comment from "@/components/forms/Comment";
 import React from "react";
 import { fetchUser } from "@/actions/user.actions";
-import { comment } from "postcss";
 
 const page = async ({ params }: { params: { id: string } }) => {
   const id = fetchUserId();

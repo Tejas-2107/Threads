@@ -11,6 +11,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Threads",
   description: "",
+  
 };
 
 export default function RootLayout({

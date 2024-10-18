@@ -44,6 +44,6 @@ export async function POST(request: NextRequest) {
     });
     return response;
   } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    throw new Error(`error while login: ${error.message}`)
   }
 }

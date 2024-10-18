@@ -20,6 +20,15 @@ const threadSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  isReposted:{
+    type:Boolean,
+    default:false
+  },
+  parentRePostId:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:"Thread",
+    default:null
+  },
   children: [
     {
       type: mongoose.Schema.Types.ObjectId,

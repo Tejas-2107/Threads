@@ -2,12 +2,13 @@ import { connectToDB } from "@/lib/mongoose";
 import User from "@/lib/models/user.model";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 connectToDB();
 
 const s3 = new S3Client({
   region: "ap-south-1", // e.g., 'us-west-2'
+  //@ts-ignore
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 });
@@ -33,7 +34,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
     if (!image || typeof image === "string") {
       return NextResponse.json({ error: "Image is required" }, { status: 400 });
     }
-    const uuid=uuidv4();
+    const uuid = uuidv4();
     const arrayBuffer = await image.arrayBuffer(); // Converts file to ArrayBuffer
     const buffer = Buffer.from(arrayBuffer);
     const imageUploadParams = {
@@ -57,13 +58,12 @@ export async function POST(request: NextRequest, response: NextResponse) {
       imageUrl,
       bio,
     });
-
     const savedUser = await newUser.save();
     return NextResponse.json({
       message: "User created successfully",
       success: true,
     });
   } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    throw new Error(`error while sign up: ${error.message}`);
   }
 }

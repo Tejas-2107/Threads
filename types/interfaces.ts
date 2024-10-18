@@ -58,3 +58,26 @@ export interface ThreadsTabProps {
   accountId: string;
   accountType: string; // Example of possible account types, you can adjust as needed
 }
+
+export interface UserCardProps {
+  userId: string;
+  username: string;
+  imageUrl: string;
+  personType?: string;
+}
+
+export interface SearchResultParams {
+  searchResult: {
+    id: string;
+    username: string;
+    imageUrl: string;
+  }[];
+  isNext: boolean;
+  totalUsersCount: number;
+}
+
+export interface PaginationProps {
+  isNextPage: boolean;
+  serachParam?: string;
+  path:string 
+}

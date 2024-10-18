@@ -14,19 +14,17 @@ export async function creatThread(threadData: ThreadData): Promise<void> {
       author: userId,
       community: null,
     });
-    // Update User model
-    await User.findByIdAndUpdate(userId, {
-      $push: { threads: createdThread._id },
-    });
     revalidatePath(path);
   } catch (error: any) {
     throw new Error(`Failed to create thread: ${error.message}`);
   }
 }
 
-export async function fetchPosts(pageNumber: 1, pageSize: 20) {
+export async function fetchPosts(pageNumber:number) {
   try {
     connectToDB();
+    console.log(pageNumber)
+    const pageSize = 10;
     //calculate number posts to skip for pagination
     const skipAmount = (pageNumber - 1) * pageSize;
     const posts = await Thread.find({
@@ -53,7 +51,7 @@ export async function fetchPosts(pageNumber: 1, pageSize: 20) {
       parentId: { $in: [null, undefined] },
     });
 
-    const isNextPage = totalPostsCount > skipAmount + posts.length;
+    const isNextPage = totalPostsCount >( skipAmount + posts.length);
 
     return { posts, totalPostsCount, isNextPage };
   } catch (error: any) {

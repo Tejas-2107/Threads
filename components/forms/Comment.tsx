@@ -22,13 +22,14 @@ const Comment = ({ currentUserId, threadId, imageUrl }: CommentProps) => {
   };
   return (
     <div className="comment_form flex justify-between gap-x-2">
-      <Image
-        src={imageUrl}
-        height={48}
-        width={48}
-        alt="profile"
-        className="rounded-full"
-      />
+      <div className="relative h-20 w-20">
+        <Image
+          src={imageUrl}
+          alt="user_logo"
+          fill
+          className="rounded-full object-cover"
+        />
+      </div>
       <form
         method="post"
         className="flex items-center gap-x-3 w-full"

@@ -9,6 +9,6 @@ export async function DELETE() {
     response.cookies.set("token", "", { httpOnly: true, expires: new Date(0) });
     return response;
   } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    throw new Error(`error while sign up: ${error.message}`);
   }
 }

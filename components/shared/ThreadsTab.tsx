@@ -11,11 +11,11 @@ const ThreadsTab = async ({
   const posts = await fetchUserPosts(accountId);
   return (
     <section>
-      {posts.threads.lenght === 0 ? (
-        <h1>No threads found</h1>
+      {posts.length === 0 ? (
+        <h1 className="mt-28 text-center">No threads found</h1>
       ) : (
         /*@ts-ignore */
-        posts.threads.map(({ _id, text, author, children, createdAt }) => (
+        posts.map(({ _id, text, author, children, createdAt }) => (
           <ThreadCard
             key={_id}
             currUserId={currentUserId}

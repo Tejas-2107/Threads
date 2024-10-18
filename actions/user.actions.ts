@@ -1,5 +1,4 @@
 "use server";
-
 import { FilterQuery, SortOrder } from "mongoose";
 import { revalidatePath } from "next/cache";
 
@@ -52,28 +51,108 @@ export async function updateUser({
 export async function fetchUserPosts(userId: string) {
   try {
     connectToDB();
-    const threads = await User.findById(userId).populate({
-      path: "threads",
-      model: Thread,
-      populate: [
-        {
-          path: "author", // Populate the author field within children
+    const threads = await Thread.find({ author: userId })
+      .populate({
+        path: "author", // Populate the main post author
+        model: User,
+        select: "_id username imageUrl", // Select only specific fields of the author
+      })
+      .populate({
+        path: "children", // Populate the children threads
+        model: Thread,
+        populate: {
+          path: "author", // Populate the author within the children threads
           model: User,
-          select: "_id username parentId imageUrl", // Select only _id and username fields of the author
+          select: "_id username imageUrl", // Select specific fields of the author
         },
-        {
-          path: "children",
-          model: Thread,
-          populate: {
-            path: "author",
-            model: User,
-            select: "username imageUrl _id", // Select the "name" and "_id" fields from the "User" model
-          },
-        },
-      ],
-    });
+      })
+      .exec();
     return threads;
   } catch (error: any) {
     throw new Error(`error while fetching user posts ${error.message}`);
+  }
+}
+
+export async function searchUsersByUsername(
+  serachParams: string,
+  pageNumber:number
+) {
+  try {
+    connectToDB();
+    const pageSize = 10;
+    const skipAmount = (pageNumber - 1) * pageSize;
+    let query = {};
+    if (serachParams.trim()) {
+      //@ts-ignore
+      query.username = { $regex: serachParams.trim(), $options: "i" };
+    }
+    const result = await User.find(query, "-password")
+      .sort({ date: "desc" })
+      .skip(skipAmount)
+      .limit(pageSize);
+    const totalUsersCount = await User.countDocuments(query);
+    const isNext = totalUsersCount > result.length + skipAmount;
+    const searchResult = result.map(
+      ({
+        _id,
+        username,
+        imageUrl,
+      }: {
+        _id: any;
+        username: string;
+        imageUrl: string;
+      }) => ({
+        id: _id.toString(),
+        username,
+        imageUrl,
+      })
+    );
+    return { searchResult, isNext, totalUsersCount };
+  } catch (error: any) {
+    throw new Error(`Failed to fetch users: ${error.message}`);
+  }
+}
+
+export async function repostThread(
+  userId: string,
+  postId: string,
+  path: string
+) {
+  try {
+    connectToDB();
+    const thread = await Thread.findById(postId);
+    if (!thread) {
+      throw new Error("thread not found");
+    }
+    if (thread.author.toString() === userId) {
+      throw new Error("you can not repost your own thread");
+    }
+    const repostThread = await Thread.create({
+      text: thread.text,
+      author: userId,
+      isReposted: true,
+      parentRePostId: postId,
+    });
+    revalidatePath(path);
+  } catch (error: any) {
+    throw new Error(`error while reposting thread ${error.message}`);
+  }
+}
+
+export async function deleteThreadById(
+  userId: string,
+  postId: string,
+  path: string
+) {
+  try {
+    connectToDB();
+    const thread = await Thread.findById(postId);
+    if (!thread) {
+      throw new Error("thread not found");
+    }
+
+    revalidatePath(path);
+  } catch (error: any) {
+    throw new Error(`error while deleting thread: ${error.message}`);
   }
 }

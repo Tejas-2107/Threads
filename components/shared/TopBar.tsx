@@ -27,7 +27,7 @@ const TopBar = () => {
             src="https://podcastr-images.s3.ap-south-1.amazonaws.com/cfe0aa89-b4c2-40eb-a91c-0f7f4c128120_pass.jpg"
             height={30}
             width={30}
-            className="rounded-full"
+            className="rounded-full object-contain"
             alt="profile picture"
           />
           <Button
