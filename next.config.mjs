@@ -4,13 +4,13 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: 'podcastr-images.s3.ap-south-1.amazonaws.com',
+                hostname: 'podcasters-images.s3.ap-south-1.amazonaws.com',
                 port: '',
                 pathname: '/**'
             },
             {
                 protocol: 'https',
-                hostname: 'podcastr-images.s3.amazonaws.com',
+                hostname: 'podcasters-images.s3.amazonaws.com',
                 port: '',
                 pathname: '/**'
             }

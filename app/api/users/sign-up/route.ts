@@ -7,12 +7,12 @@ import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 connectToDB();
 
 const s3 = new S3Client({
-  region: "ap-south-1", // e.g., 'us-west-2'
+  region: "ap-south-1", 
   //@ts-ignore
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 });
-const imageBucketName = "podcastr-images";
+const imageBucketName = "podcasters-images";
 export async function POST(request: NextRequest, response: NextResponse) {
   try {
     const reqBody = await request.formData();

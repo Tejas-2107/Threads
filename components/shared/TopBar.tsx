@@ -24,7 +24,7 @@ const TopBar = () => {
       <div className="flex items-center gap-1">
         <div className="flex items-center gap-x-2">
           <Image
-            src="https://podcastr-images.s3.ap-south-1.amazonaws.com/cfe0aa89-b4c2-40eb-a91c-0f7f4c128120_pass.jpg"
+            src="https://podcasters-images.s3.ap-south-1.amazonaws.com/cfe0aa89-b4c2-40eb-a91c-0f7f4c128120_pass.jpg"
             height={30}
             width={30}
             className="rounded-full object-contain"
